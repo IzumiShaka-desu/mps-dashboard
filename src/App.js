@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
 import MpsPatternPage from './pages/MpsPatternPage';
+import WpsPatternPage from './pages/WpsPatternPage';
 import { BrowserRouter as Router, NavLink, Link, createBrowserRouter, Route, RouterProvider } from 'react-router-dom';
 
 function App() {
@@ -22,6 +23,14 @@ function App() {
         <div>
           <Navbar />
           <MpsPatternPage />
+        </div>
+      ),
+    }, {
+      path: "WPS-Pattern",
+      element: (
+        <div>
+          <Navbar />
+          <WpsPatternPage />
         </div>
       ),
     },
