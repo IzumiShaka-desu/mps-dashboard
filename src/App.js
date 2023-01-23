@@ -21,16 +21,18 @@ function App() {
       path: "MPS-Pattern",
       element: (
         <div>
-          <Navbar />
-          <MpsPatternPage />
+          <Navbar>
+            <MpsPatternPage />
+          </Navbar>
         </div>
       ),
     }, {
       path: "WPS-Pattern",
       element: (
         <div>
-          <Navbar />
-          <WpsPatternPage />
+          <Navbar>
+            <WpsPatternPage />
+          </Navbar>
         </div>
       ),
     },

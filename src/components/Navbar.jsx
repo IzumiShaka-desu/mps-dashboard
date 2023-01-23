@@ -16,7 +16,7 @@ import { SidebarData } from "./SlidebarData";
 // STYLES
 import "./Navbar.css";
 
-export default function Navbar() {
+export default function Navbar({ children }) {
     const [sidebar, setSidebar] = useState(false);
 
     const showSidebar = () => setSidebar(!sidebar);
@@ -30,6 +30,7 @@ export default function Navbar() {
                         <FaIcons.FaBars onClick={showSidebar} />
                     </Link>
                 </div>
+                {children}
                 <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
                     <ul className="nav-menu-items" onClick={showSidebar}>
                         <li className="navbar-toggle">
