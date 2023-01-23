@@ -6,6 +6,9 @@ import { getMps } from "../api/ApiService";
 //import DefaultTable component
 import DefaultTable from "../components/DefaultTable";
 
+import ReactLoading from "react-loading";
+
+
 
 //create MpsPatternPage component with loading state
 const MpsPatternPage = () => {
@@ -87,6 +90,7 @@ const MpsPatternPage = () => {
                             name: "Type",
                             selector: "type",
                             sortable: true,
+
                         },
                     ];
                     dateOfThisMonth.map((date) => {
@@ -96,18 +100,30 @@ const MpsPatternPage = () => {
                         // let fixedDateStr = new Date(timeInMs).toISOString().split('T')[0];
                         //format to ex:22-Des
                         let fixedDateStr = new Date(timeInMs).toLocaleDateString('id-ID', { day: '2-digit', month: 'short' });
+                        // check if day is sunday or saturday
+                        let day = new Date(timeInMs).getDay();
+                        let isWeekend = day === 0 || day === 6;
 
-                        columns.push({
+                        let column = {
                             name: fixedDateStr,
                             selector: fixedDateStr,
                             sortable: false,
-                        });
+                        }
+                        if (isWeekend) {
+                            column["style"] = {
+                                backgroundColor: "red",
+                                color: "white",
+                            }
+                        }
+
+                        columns.push(column);
                         return 0;
                     });
                     columns.push({
                         name: "Total",
                         selector: "total",
                         sortable: true,
+
                     });
                     // console.log(columns);
                     // var rows = item.data.map((lineData) => {
@@ -117,7 +133,26 @@ const MpsPatternPage = () => {
                     //     let row = [];
                     //     return row;
                     // });
+                    let bottomRow = {
+                        type: "Plan",
+                    }
                     let rows = getRowsArray(item, dateOfThisMonth);
+                    dateOfThisMonth.map((date) => {
+                        let timeInMs = date.valueOf();
+                        // Mengubah milidetik
+                        timeInMs += 7 * 60 * 60 * 1000; // Tambahkan 7 jam
+                        // let fixedDateStr = new Date(timeInMs).toISOString().split('T')[0];
+                        let fixedDateStr = new Date(timeInMs).toLocaleDateString('id-ID', { day: '2-digit', month: 'short' });
+                        let dataByDate = rows.filter((item) => {
+                            return item[fixedDateStr] !== "-";
+                        });
+                        // assign count of dataByDate to bottomRow[fixedDateStr]
+                        bottomRow[fixedDateStr] = dataByDate.length;
+
+                        return 0;
+
+                    });
+                    bottomRow["total"] = rows.map((item) => { return item.total }).reduce((a, b) => a + b, 0);
 
                     console.log(rows);
 
@@ -125,6 +160,7 @@ const MpsPatternPage = () => {
                         line: item.line,
                         columns: columns,
                         rows: rows,
+                        footer: bottomRow,
                     }
                 });
                 console.log(tablesOfLines);
@@ -145,9 +181,19 @@ const MpsPatternPage = () => {
 
     // if state is loading show loading animation else show DefaultTable component
     return loading ? (
-        <div className="loading">
-            <div className="spinner-border text-primary" role="status">
-                <span className="sr-only">Loading...</span>
+        // show loading animation in center
+        <div className="container">
+            <div className="row">
+                <div className="col d-flex align-items-center justify-content-center text-center not-found-container">
+                    {/* make this loading to center */}
+
+                    <ReactLoading type={"bubbles"} color={"#30C5FF"} height={'20%'} alo width={'20%'} />
+                </div>
+            </div>
+            <div className="row">
+                <div className="col">
+                    <h1>Loading...</h1>
+                </div>
             </div>
         </div>
     ) : errorMessage == null ? (
@@ -160,7 +206,7 @@ const MpsPatternPage = () => {
                         console.log(tableOfLines);
                         return (
                             <div>
-                                <DefaultTable key={tableOfLines.line} columns={tableOfLines.columns} data={tableOfLines.rows} title={`Line ${tableOfLines.line}`} />
+                                <DefaultTable key={tableOfLines.line} footer={tableOfLines.footer} columns={tableOfLines.columns} data={tableOfLines.rows.concat(tableOfLines.footer)} title={`Line ${tableOfLines.line}`} />
                             </div>
                         )
 
