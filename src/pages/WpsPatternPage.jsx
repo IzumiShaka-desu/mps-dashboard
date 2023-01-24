@@ -6,6 +6,7 @@ import { getWps } from "../api/ApiService";
 import { Row, Col, Container } from "react-bootstrap";
 //import DefaultTable component
 import DefaultTable from "../components/DefaultTable";
+import DefaultLoading from "../components/DefaultLoading";
 
 
 import ReactLoading from "react-loading";
@@ -186,20 +187,7 @@ const WpsPatternPage = () => {
     // if state is loading show loading animation else show DefaultTable component
     return loading ? (
         // show loading animation in center
-        <Container>
-            <Row>
-                <Col><Container></Container></Col>
-                <Col><ReactLoading type={"bubbles"} color={"#30C5FF"} height={'20%'} width={'20%'} />
-                </Col>
-                <Col><Container></Container> </Col>
-            </Row>
-
-            <div className="row">
-                <div className="col">
-                    <h1>Loading...</h1>
-                </div>
-            </div>
-        </Container>
+        <DefaultLoading />
     ) : errorMessage == null ? (
         <div className="container">
             <div className="row">
