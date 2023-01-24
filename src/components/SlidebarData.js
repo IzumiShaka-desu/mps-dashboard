@@ -24,11 +24,12 @@ export const SidebarData = [
         cName: "nav-text"
     },
     {
-        title: "Team",
-        path: "/team",
-        icon: <IoIcons.IoMdPeople />,
+        title: "WO Pattern",
+        path: "/WO-Pattern",
+        icon: <FaIcons.FaNewspaper />,
         cName: "nav-text"
     },
+
     {
         title: "Messages",
         path: "/",
