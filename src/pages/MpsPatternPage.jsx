@@ -7,6 +7,7 @@ import { getMps } from "../api/ApiService";
 import DefaultTable from "../components/DefaultTable";
 
 import ReactLoading from "react-loading";
+import DefaultLoading from "../components/DefaultLoading";
 
 
 
@@ -184,20 +185,7 @@ const MpsPatternPage = () => {
     // if state is loading show loading animation else show DefaultTable component
     return loading ? (
         // show loading animation in center
-        <div className="container">
-            <div className="row">
-                <div className="col d-flex align-items-center justify-content-center text-center not-found-container">
-                    {/* make this loading to center */}
-
-                    <ReactLoading type={"bubbles"} color={"#30C5FF"} height={'20%'} alo width={'20%'} />
-                </div>
-            </div>
-            <div className="row">
-                <div className="col">
-                    <h1>Loading...</h1>
-                </div>
-            </div>
-        </div>
+        <DefaultLoading />
     ) : errorMessage == null ? (
         <div className="container">
             <div className="row">
