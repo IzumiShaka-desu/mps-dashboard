@@ -49,7 +49,6 @@ const DefaultTable = ({ data, columns, title, footer }) => {
                     if ((index >= rangeFilter[0] && index <= rangeFilter[1]) || (index == 0 || index == columns.length - 1)) {
                         return column;
                     }
-
                     return null;
                 }).filter((column) => column != null)
                 }
