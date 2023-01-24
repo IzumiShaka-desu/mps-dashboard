@@ -90,6 +90,8 @@ const MpsPatternPage = () => {
                             name: "Type",
                             selector: "type",
                             sortable: true,
+                            width: "150px",
+
 
                         },
                     ];
