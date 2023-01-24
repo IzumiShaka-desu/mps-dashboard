@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import MpsPatternPage from './pages/MpsPatternPage';
 import WpsPatternPage from './pages/WpsPatternPage';
+import WoPatternPage from './pages/WoPatternPage';
 import { BrowserRouter as Router, NavLink, Link, createBrowserRouter, Route, RouterProvider } from 'react-router-dom';
 
 function App() {
@@ -32,6 +33,15 @@ function App() {
         <div>
           <Navbar>
             <WpsPatternPage />
+          </Navbar>
+        </div>
+      ),
+    }, {
+      path: "WO-Pattern",
+      element: (
+        <div>
+          <Navbar>
+            <WoPatternPage />
           </Navbar>
         </div>
       ),
