@@ -27,6 +27,21 @@ function DetailWo() {
                     setTitle(result.data.title);
                     setErrorMessage(null);
                     let rows = result.data.items;
+                    // format status to be more readable (ex: "1" to "Planning", "5" to "Active", "7" to "Completed", "10" to "Closed", else show the status)
+                    rows = rows.map((item) => {
+                        let status = item.status;
+                        if (status == 1) {
+                            item.status = "Planning";
+                        } else if (status == 5) {
+                            item.status = "Active";
+                        } else if (status == 7) {
+                            item.status = "Completed";
+                        } else if (status == 10) {
+                            item.status = "Closed";
+                        }
+                        return item;
+                    });
+
                     // format tanggal wo to be more readable (ex: "2021-01-01" to "01 Januari 2021")
                     rows = rows.map((item) => {
                         let date = new Date(item.tanggal_wo);
