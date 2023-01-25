@@ -21,9 +21,14 @@ const getWo = async () => {
     // return data
     return response.json();
 }
+const getDetailWo = async ({ line, date = "", type = "" }) => {
+    const response = await fetch(`${baseUrl}patterns/wo/${line}?date=${date}&type=${type}`);
+    // return data
+    return response.json();
+}
 
 //export API Services
-export { getMps, getWps, getWo };
+export { getMps, getWps, getWo, getDetailWo };
 
 
 
