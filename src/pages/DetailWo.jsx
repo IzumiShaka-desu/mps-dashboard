@@ -42,6 +42,7 @@ function DetailWo() {
                             name: name,
                             selector: key,
                             sortable: true,
+
                             // width: "150px",
                         };
                     }
