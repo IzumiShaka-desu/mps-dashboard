@@ -136,10 +136,14 @@ const MpsPatternPage = () => {
                     //     let row = [];
                     //     return row;
                     // });
-                    let bottomRow = {
+                    let bottomRow = [{
                         type: "Plan",
+                    }, {
+                        type: "Grand Total",
                     }
+                    ]
                     let rows = getRowsArray(item, dateOfThisMonth);
+                    let totalPlan = 0;
                     dateOfThisMonth.map((date) => {
                         let timeInMs = date.valueOf();
                         // Mengubah milidetik
@@ -150,12 +154,26 @@ const MpsPatternPage = () => {
                             return item[fixedDateStr] !== "-";
                         });
                         // assign count of dataByDate to bottomRow[fixedDateStr]
-                        bottomRow[fixedDateStr] = dataByDate.length;
+                        bottomRow[0][fixedDateStr] = dataByDate.length;
+                        bottomRow[1][fixedDateStr] = dataByDate.map((item) => {
+
+                            return parseInt(item[fixedDateStr]);
+                        }).reduce((a, b) => a + b, 0);
+                        console.log(`databydate ${fixedDateStr}`);
+                        console.log(dataByDate);
+
+                        totalPlan += dataByDate.length;
 
                         return 0;
 
                     });
-                    bottomRow["total"] = rows.map((item) => { return item.total }).reduce((a, b) => a + b, 0);
+                    bottomRow[0]["total"] = totalPlan;
+                    bottomRow[1]["total"] =
+                        // rows.map((item) => {
+                        //     return item.total;
+                        // }).reduce((a, b) => a + b, 0);
+
+                        rows.map((item) => { return item.total }).reduce((a, b) => a + b, 0);
 
                     console.log(rows);
 
