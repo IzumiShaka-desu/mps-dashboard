@@ -5,11 +5,18 @@ import DataTable from "react-data-table-component";
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 
-const DefaultTable = ({ data, columns, title, footer }) => {
+const DefaultTable = ({ data, columns, title, footer, enableFilter = true, disableBottomRow = false }) => {
 
-    const conditionalRowStyles = [
+    const conditionalRowStyles = disableBottomRow ? [] : [
         {
-            when: row => row.type.toLowerCase().includes("plan"),
+            when: row => {
+                try {
+                    return row.type.toLowerCase().includes("plan")
+                } catch (error) {
+                    console.log(error);
+                    return false;
+                }
+            },
             style: {
                 backgroundColor: "#30C5FF",
                 userSelect: "none",
@@ -31,7 +38,7 @@ const DefaultTable = ({ data, columns, title, footer }) => {
 
     return (
         <div onScroll={handleScroll}>
-            <Box sx={{ width: 300 }}>
+            {enableFilter ? <Box sx={{ width: 300 }}>
 
                 <Slider
                     size="small"
@@ -42,15 +49,15 @@ const DefaultTable = ({ data, columns, title, footer }) => {
                     valueLabelDisplay="auto"
                     onChange={handleSliderChange}
                 />
-            </Box>
+            </Box> : <div></div>}
             <DataTable
                 title={title}
-                columns={columns.map((column, index) => {
+                columns={enableFilter ? columns.map((column, index) => {
                     if ((index >= rangeFilter[0] && index <= rangeFilter[1]) || (index == 0 || index == columns.length - 1)) {
                         return column;
                     }
                     return null;
-                }).filter((column) => column != null)
+                }).filter((column) => column != null) : columns
                 }
                 data={data}
                 footer={footer}
