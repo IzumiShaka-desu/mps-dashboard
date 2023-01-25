@@ -48,6 +48,7 @@ const WoPatternPage = () => {
                         let data = lineData.data[index];
                         let obj = {
                             type: type,
+                            ...data,
                         }
                         dateOfThisMonth.map((date) => {
                             let timeInMs = date.valueOf();
@@ -109,10 +110,22 @@ const WoPatternPage = () => {
                         let day = new Date(timeInMs).getDay();
                         let isWeekend = day === 0 || day === 6;
 
+
                         let column = {
                             name: fixedDateStr,
                             selector: fixedDateStr,
                             sortable: false,
+                            cell: (row, index, column, id) => {
+                                console.log(row);
+                                console.log(index);
+                                console.log(item);
+
+                                console.log(column);
+                                return <Link style={{
+                                    color: "#000",
+                                    textDecoration: "none",
+                                }} to={`/WO-Pattern/details?date=${date.toISOString()}&type=${row.type}&line=${item.line}`} preventScrollReset={true}>{row[column.selector]}</Link>
+                            }
                         }
                         if (isWeekend) {
                             column["style"] = {
