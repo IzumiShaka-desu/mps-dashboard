@@ -121,7 +121,7 @@ const WoPatternPage = () => {
                                 console.log(item);
 
                                 console.log(column);
-                                return <Link style={{
+                                return row[column.selector] == "-" ? row[column.selector] : <Link style={{
                                     color: "#000",
                                     textDecoration: "none",
                                 }} to={`/WO-Pattern/details?date=${date.toISOString()}&type=${row.type}&line=${item.line}`} preventScrollReset={true}>{row[column.selector]}</Link>
