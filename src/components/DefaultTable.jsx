@@ -22,7 +22,26 @@ const DefaultTable = ({ data, columns, title, footer, enableFilter = true, disab
                 userSelect: "none",
                 color: "white",
             }
-        }
+        },
+        // add custom style for row when type is grand total
+        {
+            when: row => {
+                try {
+                    return row.type.toLowerCase().includes("total")
+                } catch (error) {
+                    console.log(error);
+                    return false;
+                }
+            },
+            style: {
+                backgroundColor: "#FFC107",
+                userSelect: "none",
+                color: "white",
+            }
+        },
+
+
+
     ];
     const handleScroll = (state) => {
         console.log(state);
