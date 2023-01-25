@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import MpsPatternPage from './pages/MpsPatternPage';
 import WpsPatternPage from './pages/WpsPatternPage';
 import WoPatternPage from './pages/WoPatternPage';
+import DetailWo from './pages/DetailWo';
 import { BrowserRouter as Router, NavLink, Link, createBrowserRouter, Route, RouterProvider } from 'react-router-dom';
 
 function App() {
@@ -42,6 +43,30 @@ function App() {
         <div>
           <Navbar>
             <WoPatternPage />
+          </Navbar>
+        </div>
+      ),
+      children: [
+
+      ]
+    },
+    {
+      path: "/WO-Pattern/details",
+      // loader: ({ params }) => {
+      // params.line; // abc
+      // params.date; // 3
+      // params.type; // 3
+      // },
+      // action: ({ params }) => {
+      // params.line; // abc
+      // params.date; // 3
+      // params.type; // 3
+      // },
+      element: (
+        <div>
+          <Navbar>
+            <DetailWo />
+            {/* <h1>Detail</h1> */}
           </Navbar>
         </div>
       ),
