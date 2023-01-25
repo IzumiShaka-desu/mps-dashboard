@@ -27,6 +27,19 @@ function DetailWo() {
                     setTitle(result.data.title);
                     setErrorMessage(null);
                     let rows = result.data.items;
+                    // last row is total
+                    let bottomRow = {
+                        tanggal_wo: "Total",
+                        qty: rows.reduce((total, item) => {
+                            return total + item.qty;
+                        }
+                            , 0),
+
+
+                    }
+
+                    rows.push(bottomRow);
+
                     // create array of columns based on rows keys
                     let columns = Object.keys(rows[0]).map((key) => {
                         let name = key;
