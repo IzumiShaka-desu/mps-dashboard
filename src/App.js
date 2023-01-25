@@ -14,8 +14,8 @@ function App() {
       element: (
         <div>
           <Navbar />
-          <h1>Hello World</h1>
-          <Link to="about">About Us</Link>
+          {/* <h1>Hello World</h1>
+          <Link to="about">About Us</Link> */}
         </div>
       ),
     },
