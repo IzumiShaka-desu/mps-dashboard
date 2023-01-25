@@ -27,6 +27,13 @@ function DetailWo() {
                     setTitle(result.data.title);
                     setErrorMessage(null);
                     let rows = result.data.items;
+                    // format tanggal wo to be more readable (ex: "2021-01-01" to "01 Januari 2021")
+                    rows = rows.map((item) => {
+                        let date = new Date(item.tanggal_wo);
+                        let dateStr = date.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+                        item.tanggal_wo = dateStr;
+                        return item;
+                    });
                     // last row is total
                     let bottomRow = {
                         tanggal_wo: "Total",
